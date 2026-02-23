@@ -1,0 +1,302 @@
+/* ═══════════════════════════════════════════════════════════════
+   COMPÉTITION BIBLIQUE — Material Design 3 · Pastel & Clair
+   Typographie : Google Fonts (Nunito + Inter)
+   Palette : surface blanc cassé, tons pastel doux, accents indigo
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+/* ── Design Tokens MD3 ──────────────────────────────────────── */
+:root {
+  /* Surfaces */
+  --md-surface:        #FFFBFE;
+  --md-surface-1:      #F6F2FF;
+  --md-surface-2:      #EDE8F5;
+  --md-surface-3:      #E6E0F0;
+  --md-surface-var:    #E7E0EC;
+
+  /* Schéma de couleur principal — Indigo/Violet doux */
+  --md-primary:        #6750A4;
+  --md-primary-cont:   #EADDFF;
+  --md-on-primary:     #FFFFFF;
+  --md-on-primary-cnt: #21005D;
+
+  /* Secondaire — Rose Corail pastel */
+  --md-secondary:      #7D5260;
+  --md-secondary-cont: #FFD8E4;
+  --md-on-sec-cnt:     #31111D;
+
+  /* Tertiaire — Vert sauge */
+  --md-tertiary:       #00696B;
+  --md-tertiary-cont:  #A2F3F4;
+  --md-on-tert-cnt:    #002020;
+
+  /* Erreur */
+  --md-error:          #B3261E;
+  --md-error-cont:     #F9DEDC;
+  --md-on-error-cnt:   #410E0B;
+
+  /* Outline */
+  --md-outline:        #79747E;
+  --md-outline-var:    #CAC4D0;
+
+  /* Texte */
+  --md-on-surface:     #1C1B1F;
+  --md-on-surf-var:    #49454F;
+  --md-on-surf-3:      #938F99;
+
+  /* Tokens utiles raccourcis */
+  --primary:           var(--md-primary);
+  --primary-c:         var(--md-primary-cont);
+  --secondary:         var(--md-secondary);
+  --secondary-c:       var(--md-secondary-cont);
+  --tertiary:          var(--md-tertiary);
+  --tertiary-c:        var(--md-tertiary-cont);
+  --error:             var(--md-error);
+  --error-c:           var(--md-error-cont);
+  --surface:           var(--md-surface);
+  --surface1:          var(--md-surface-1);
+  --surface2:          var(--md-surface-2);
+  --on-surface:        var(--md-on-surface);
+  --on-surf-var:       var(--md-on-surf-var);
+  --outline:           var(--md-outline-var);
+
+  /* Typo */
+  --f-head:  'Nunito', sans-serif;
+  --f-body:  'Inter', sans-serif;
+
+  /* Géométrie MD3 */
+  --r-xs:   4px;
+  --r-sm:   8px;
+  --r-md:   12px;
+  --r-lg:   16px;
+  --r-xl:   28px;
+  --r-full: 9999px;
+
+  /* Ombres MD3 */
+  --elev-1: 0 1px 2px rgba(0,0,0,.10), 0 1px 3px 1px rgba(0,0,0,.07);
+  --elev-2: 0 1px 2px rgba(0,0,0,.10), 0 2px 6px 2px rgba(0,0,0,.08);
+  --elev-3: 0 1px 3px rgba(0,0,0,.12), 0 4px 8px 3px rgba(0,0,0,.09);
+  --elev-4: 0 2px 3px rgba(0,0,0,.12), 0 6px 10px 4px rgba(0,0,0,.10);
+}
+
+/* ── Reset ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--surface1);
+  color: var(--on-surface);
+  font-family: var(--f-body);
+  font-size: 1rem; line-height: 1.55;
+  min-height: 100dvh; overflow-x: hidden;
+}
+#app { min-height: 100dvh; }
+
+/* ── Keyframes ─────────────────────────────────────────────── */
+@keyframes fadeUp  { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+@keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+@keyframes spin    { to{transform:rotate(360deg)} }
+@keyframes scaleIn { from{opacity:0;transform:scale(.94)} to{opacity:1;transform:scale(1)} }
+@keyframes pulse   { 0%,100%{opacity:1} 50%{opacity:.45} }
+@keyframes ripple  { to{transform:scale(4);opacity:0} }
+
+.fade-up  { animation: fadeUp  .3s cubic-bezier(.2,.8,.3,1) both; }
+.fade-in  { animation: fadeIn  .22s ease both; }
+.scale-in { animation: scaleIn .28s cubic-bezier(.2,.8,.3,1) both; }
+.pulse    { animation: pulse 1.4s ease infinite; }
+
+/* Page transitions */
+.page-enter-active, .page-leave-active { transition: opacity .2s ease, transform .2s ease; }
+.page-enter-from { opacity:0; transform:translateY(8px); }
+.page-leave-to   { opacity:0; transform:translateY(-6px); }
+
+/* ── MD3 Components ──────────────────────────────────────── */
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--outline); border-radius: 4px; }
+
+/* ── Cards (Surface tonale MD3) ── */
+.card {
+  background: var(--surface);
+  border-radius: var(--r-xl);
+  box-shadow: var(--elev-1);
+  padding: 1.2rem;
+  position: relative;
+  overflow: hidden;
+}
+.card-primary {
+  background: var(--primary-c);
+  color: var(--md-on-primary-cnt);
+}
+.card-secondary { background: var(--secondary-c); color: var(--md-on-sec-cnt); }
+.card-tertiary  { background: var(--tertiary-c);  color: var(--md-on-tert-cnt); }
+.card-error     { background: var(--error-c);     color: var(--md-on-error-cnt); }
+.card-success   { background: #C8F5D0; color: #0A3D17; }
+.card-warn      { background: #FFF3C8; color: #3D2C00; }
+
+/* ── Boutons MD3 (Filled / Outlined / Text) ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .65rem 1.5rem; border: none;
+  border-radius: var(--r-full);
+  font-family: var(--f-body); font-size: .9rem; font-weight: 600;
+  letter-spacing: .02em;
+  cursor: pointer; transition: all .2s cubic-bezier(.2,.8,.3,1);
+  position: relative; overflow: hidden; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:disabled { opacity: .38; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-full { width: 100%; }
+.btn-sm   { padding: .45rem 1.1rem; font-size: .82rem; }
+
+/* Filled */
+.btn-primary {
+  background: var(--primary); color: var(--md-on-primary);
+  box-shadow: var(--elev-1);
+}
+.btn-primary:not(:disabled):hover { box-shadow: var(--elev-2); filter: brightness(1.06); }
+.btn-primary:not(:disabled):active { box-shadow: none; filter: brightness(.96); transform: scale(.98); }
+
+/* Tonal */
+.btn-tonal {
+  background: var(--primary-c); color: var(--md-on-primary-cnt);
+}
+.btn-tonal:not(:disabled):hover { background: color-mix(in srgb, var(--primary) 18%, var(--primary-c)); box-shadow: var(--elev-1); }
+
+/* Outlined */
+.btn-outlined {
+  background: transparent; color: var(--primary);
+  border: 1.5px solid var(--outline);
+}
+.btn-outlined:not(:disabled):hover { background: color-mix(in srgb, var(--primary) 8%, transparent); border-color: var(--primary); }
+
+/* Text */
+.btn-text {
+  background: transparent; color: var(--primary); padding: .5rem .85rem;
+}
+.btn-text:not(:disabled):hover { background: color-mix(in srgb, var(--primary) 8%, transparent); }
+
+/* Danger */
+.btn-danger { background: var(--error-c); color: var(--md-on-error-cnt); }
+
+/* ── FAB / Icon Button ── */
+.btn-icon {
+  width: 40px; height: 40px; padding: 0;
+  border-radius: var(--r-full);
+  background: transparent; color: var(--on-surf-var);
+  border: none; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-icon:not(:disabled):hover { background: color-mix(in srgb, var(--primary) 8%, transparent); }
+
+/* ── TextField MD3 ── */
+.inp {
+  width: 100%;
+  background: var(--surface2);
+  border: 1.5px solid var(--outline);
+  border-radius: var(--r-sm);
+  color: var(--on-surface);
+  font-family: var(--f-body); font-size: 1rem;
+  padding: .7rem 1rem;
+  outline: none;
+  transition: border-color .18s, box-shadow .18s;
+}
+.inp:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent);
+}
+.inp::placeholder { color: var(--on-surf-var); }
+.inp:disabled { opacity: .45; cursor: not-allowed; }
+textarea.inp { resize: vertical; min-height: 90px; line-height: 1.55; }
+.inp-success { border-color: var(--tertiary) !important; }
+.inp-error   { border-color: var(--error)    !important; }
+
+/* ── Chips MD3 ── */
+.chip {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .3rem .85rem;
+  border-radius: var(--r-full);
+  font-family: var(--f-body); font-size: .78rem; font-weight: 600;
+  border: 1.5px solid var(--outline);
+  background: transparent; color: var(--on-surf-var);
+  cursor: pointer; transition: all .18s;
+}
+.chip-primary  { background: var(--primary-c); border-color: var(--primary-c); color: var(--md-on-primary-cnt); }
+.chip-success  { background: #C8F5D0; border-color: #4CAF50; color: #0A3D17; }
+.chip-error    { background: var(--error-c); border-color: var(--error); color: var(--md-on-error-cnt); }
+.chip-warn     { background: #FFF3C8; border-color: #F9A825; color: #3D2C00; }
+.chip-secondary{ background: var(--secondary-c); border-color: var(--secondary); color: var(--md-on-sec-cnt); }
+
+/* ── Progress bar ── */
+.prog {
+  width: 100%; height: 4px;
+  background: var(--surface3, #E6E0F0);
+  border-radius: 4px; overflow: hidden;
+}
+.prog-fill {
+  height: 100%; border-radius: 4px;
+  background: var(--primary);
+  transition: width .4s ease;
+}
+
+/* ── Divider ── */
+.divider { width: 100%; height: 1px; background: var(--outline); margin: .75rem 0; }
+
+/* ── Spinner ── */
+.spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--primary-c);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  margin: 0 auto;
+}
+.spinner-sm { width: 18px; height: 18px; border-width: 2px; display: inline-block; vertical-align: middle; }
+
+/* ── Score ── */
+.score-display {
+  font-family: var(--f-head); font-size: 1.35rem; font-weight: 800;
+  color: var(--primary); letter-spacing: -.01em;
+}
+
+/* ── Layout wrappers ── */
+.page {
+  display: flex; flex-direction: column;
+  min-height: 100dvh; padding: .85rem 1rem;
+  gap: .75rem;
+  max-width: 600px; margin: 0 auto;
+}
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .25rem 0;
+}
+
+/* ── Utilitaires ── */
+.muted    { color: var(--on-surf-var); }
+.dim      { color: var(--md-on-surf-3); }
+.t-prim   { color: var(--primary); }
+.t-sec    { color: var(--secondary); }
+.t-ok     { color: var(--tertiary); }
+.t-err    { color: var(--error); }
+.t-warn   { color: #E65100; }
+.center   { text-align: center; }
+.italic   { font-style: italic; }
+.small    { font-size: .85rem; }
+.xs       { font-size: .78rem; }
+.bold     { font-weight: 700; }
+.heading  { font-family: var(--f-head); }
+
+/* Headline MD3 */
+.headline-sm { font-family: var(--f-head); font-size: 1.5rem; font-weight: 700; letter-spacing: -.01em; }
+.headline-md { font-family: var(--f-head); font-size: 1.75rem; font-weight: 800; }
+.title-lg    { font-family: var(--f-head); font-size: 1.25rem; font-weight: 700; }
+.title-md    { font-family: var(--f-head); font-size: 1.1rem;  font-weight: 600; }
+.label-lg    { font-family: var(--f-body); font-size: .88rem;  font-weight: 600; letter-spacing: .04em; }
+.label-sm    { font-family: var(--f-body); font-size: .72rem;  font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+
+/* Safe area */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-bottom { padding-bottom: max(.85rem, env(safe-area-inset-bottom)); }
+}
